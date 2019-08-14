@@ -1,6 +1,21 @@
+/* Hide scroll bar in Firefox */
 @-moz-document url-prefix() {
   body {
-    height: 99%; /* Hide scroll bar in Firefox */
+    height: 99%;
+  }
+}
+
+/* 打印样式 */
+@media print {
+  #a {
+    display: none;
+  }
+  #b {
+    display: none;
+  }
+  #c {
+    width: 100% !important;
+    background: #fff;
   }
 }
 
@@ -82,7 +97,7 @@ ins {
 }
 
 .source a {
-  color: red;
+  color: rgb(251, 152, 152);
   text-decoration: none;
 }
 
