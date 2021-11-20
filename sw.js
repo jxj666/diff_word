@@ -1,5 +1,5 @@
 /*
- * @LastEditTime: 2021-11-20 22:57:28
+ * @LastEditTime: 2021-11-20 22:59:43
  * @LastEditors: jinxiaojian
  */
 var cacheStorageKey = 'wendanduibiqi-1.1.2'
@@ -49,6 +49,8 @@ self.addEventListener('activate', function (e) {
       })
     ).then(() => {
       return self.clients.claim()
+    }).catch(err => {
+      console.log('err', err)
     })
   )
 })
