@@ -1,19 +1,19 @@
 /*
- * @LastEditTime: 2021-11-20 22:50:05
+ * @LastEditTime: 2021-11-20 22:57:28
  * @LastEditors: jinxiaojian
  */
-var cacheStorageKey = 'wendanduibiqi-1.1.1'
-
+var cacheStorageKey = 'wendanduibiqi-1.1.2'
+let preUrl = ''
+if (location.protocol === "https:") { preUrl = '/diff_word' }
 var cacheList = [
-  '/',
-  "index.html",
-  "main.js",
-  "diff.js",
-  "cssChange.js",
-  "style.css",
-  "icon.png",
-  "manifest.json",
-  "sw.js"
+  preUrl + "/index.html",
+  preUrl + "/main.js",
+  preUrl + "/diff.js",
+  preUrl + "/cssChange.js",
+  preUrl + "/style.css",
+  preUrl + "/icon.png",
+  preUrl + "/manifest.json",
+  preUrl + "/sw.js"
 ]
 
 // 借助 Service Worker, 可以在注册完成安装 Service Worker 时, 抓取资源写入缓存
