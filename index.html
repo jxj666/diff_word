@@ -3,7 +3,7 @@
  * @Author: jinxiaojian
  * @Email: jinxiaojian@youxin.com
  * @Date: 2019-07-11 11:02:54
- * @LastEditTime: 2021-11-20 21:38:05
+ * @LastEditTime: 2021-11-20 22:10:15
  * @LastEditors: jinxiaojian
  -->
 <!DOCTYPE html>
@@ -14,6 +14,7 @@
 	<title>文档对比器</title>
 	<link rel="stylesheet" href="./style.css">
 	<link rel="icon" href="./favicon.ico">
+	<link rel="manifest" href="manifest.json" />
 
 </head>
 
@@ -28,10 +29,9 @@
 		</div>
 		<div>
 			<h1>结果框宽度</h1>
-			<button onclick='cssChange(0,95)'>最大</button>
-			<button onclick='cssChange(1,0)'>➕</button>
-			<button onclick='cssChange(-1,0)'>➖</button>
-			<button onclick='cssChange(0,5)'>最小</button>
+			<button onclick='cssChange(9)'>最大</button>
+			<button onclick='cssChange(1)'>均分</button>
+			<button onclick='cssChange(0.1)'>最小</button>
 		</div>
 		<div>
 			<h1>对比精细度</h1>
@@ -58,67 +58,15 @@
 
 	<script src="./cssChange.js"></script>
 	<script src="./diff.js"></script>
-	<script defer="">
-		var a = document.getElementById('a');
-		var b = document.getElementById('b');
-		var c = document.getElementById('c');
-
-		var result = document.getElementById('result');
-
-		function changed() {
-			var diff = JsDiff[window.diffType](a.textContent, b.textContent);
-			var fragment = document.createDocumentFragment();
-			for (var i = 0; i < diff.length; i++) {
-
-				if (diff[i].added && diff[i + 1] && diff[i + 1].removed) {
-					var swap = diff[i];
-					diff[i] = diff[i + 1];
-					diff[i + 1] = swap;
-				}
-
-				var node;
-				if (diff[i].removed) {
-					node = document.createElement('del');
-					node.appendChild(document.createTextNode(diff[i].value));
-				} else if (diff[i].added) {
-					node = document.createElement('ins');
-					node.appendChild(document.createTextNode(diff[i].value));
-				} else {
-					node = document.createTextNode(diff[i].value);
-				}
-				fragment.appendChild(node);
-			}
-
-			result.textContent = '';
-			result.appendChild(fragment);
-		}
-
-		window.onload = function () {
-			onDiffTypeChange(document.querySelector('#settings [name="diff_type"]:checked'));
-
-		};
-
-		// a.onpaste = a.onchange =
-		// 	b.onpaste = b.onchange = changed;
-
-		// if ('oninput' in a) {
-		// 	a.oninput = b.oninput = changed;
-		// } else {
-		// 	a.onkeyup = b.onkeyup = changed;
-		// }
-
-		function onDiffTypeChange(radio) {
-			window.diffType = radio.value;
-		}
-		var radio = document.getElementsByName('diff_type');
-		for (var i = 0; i < radio.length; i++) {
-			radio[i].onchange = function (e) {
-				onDiffTypeChange(e.target);
-				changed();
-			}
+	<script defer src='main.js'></script>
+	<script>
+		if (navigator.serviceWorker != null) {
+			navigator.serviceWorker.register('sw.js')
+			.then(function(registration) {
+				console.log('Registered events at scope: ', registration.scope);
+			});
 		}
 	</script>
-
 
 </body>
 
