@@ -26,20 +26,16 @@
 html,
 body {
   background: #eee;
-  font: 12px sans-serif;
+  font: 12px ;
 }
-body {
-  padding-top: 1.8em;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
+
 html,
 body,
 table,
 tbody,
 tr,
 td {
+  box-sizing: border-box;
   height: 100%;
 }
 table {
@@ -58,7 +54,8 @@ td {
 }
 h1 {
   display: inline;
-  font-size: 100%;
+  font-size: 20px;
+  color:#333;
 }
 del {
   text-decoration: none;
@@ -77,29 +74,19 @@ ins {
 }
 
 #settings {
-  position: fixed;
+  display: grid;
+  padding:0 10px;
   top: 0;
-  left: 5px;
-  right: 5px;
-  height: 2em;
-  line-height: 2em;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  line-height: 50px;
   background: #eee;
   border-bottom: 1px solid #999;
 }
-#settings label {
-  margin-left: 1em;
+#content{
+  height: calc(100vh - 55px);
 }
 
-.source {
-  position: absolute;
-  right: 1%;
-  top: 0.2em;
-}
 
-.source a {
-  color: rgb(251, 152, 152);
-  text-decoration: none;
-}
 
 [contentEditable] {
   background: #f9f9f9;
