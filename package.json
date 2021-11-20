@@ -1,0 +1,22 @@
+{
+  "name": "diff_word",
+  "version": "1.0.0",
+  "description": "<!--\r  * @Description: \r  * @Author: jinxiaojian\r  * @Email: jinxiaojian@youxin.com\r  * @Date: 2019-08-14 11:36:40\r  * @LastEditTime: 2021-11-20 21:57:37\r  * @LastEditors: jinxiaojian\r  -->\r # 文档对比器",
+  "main": "main.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "lite-serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jxj666/diff_word.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jxj666/diff_word/issues"
+  },
+  "homepage": "https://github.com/jxj666/diff_word#readme"
+}
