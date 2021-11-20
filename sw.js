@@ -1,8 +1,8 @@
 /*
- * @LastEditTime: 2021-11-20 22:41:48
+ * @LastEditTime: 2021-11-20 22:50:05
  * @LastEditors: jinxiaojian
  */
-var cacheStorageKey = 'wendanduibiqi'
+var cacheStorageKey = 'wendanduibiqi-1.1.1'
 
 var cacheList = [
   '/',
