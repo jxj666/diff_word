@@ -1,61 +1,23 @@
-/* Hide scroll bar in Firefox */
-@-moz-document url-prefix() {
-  body {
-    height: 99%;
-  }
-}
-
-/* 打印样式 */
-@media print {
-  #a {
-    display: none;
-  }
-  #b {
-    display: none;
-  }
-  #c {
-    width: 100% !important;
-    background: #fff;
-  }
-}
 
 * {
   margin: 0;
   padding: 0;
 }
-html,
-body {
-  background: #eee;
-  font: 12px ;
+
+a {
+  color: #2175c999;
 }
 
 html,
-body,
-table,
-tbody,
-tr,
-td {
+body {
   box-sizing: border-box;
   height: 100%;
 }
-table {
-  table-layout: fixed;
-  width: 100%;
-}
-td {
-  width: 33%;
-  padding: 3px 4px;
-  border: 1px solid transparent;
-  vertical-align: top;
-  font: 1em monospace;
-  text-align: left;
-  white-space: pre-wrap;
-  overflow: auto;
-}
+
 h1 {
   display: inline;
   font-size: 20px;
-  color:#333;
+  color: #333;
 }
 del {
   text-decoration: none;
@@ -75,23 +37,38 @@ ins {
 
 #settings {
   display: grid;
-  padding:0 10px;
+  padding: 0 10px;
   top: 0;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   line-height: 50px;
   background: #eee;
   border-bottom: 1px solid #999;
 }
-#content{
+#content {
   height: calc(100vh - 55px);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  font: 1em monospace;
+  text-align: left;
+  white-space: pre-wrap;
+  overflow: auto;
+  grid-gap:1px;
+  padding: 1px;
 }
-
-
+#a,
+#b,
+#c {
+  border-radius: 4px;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  border: 1px solid gray;
+  box-sizing: border-box;
+}
 
 [contentEditable] {
   background: #f9f9f9;
   border-color: #bbb #d9d9d9 #ddd;
-  border-radius: 4px;
   -webkit-user-modify: read-write-plaintext-only;
   outline: none;
 }
@@ -99,4 +76,27 @@ ins {
   background: #fff;
   border-color: #6699cc;
   box-shadow: 0 0 4px #2175c9;
+}
+
+/* 打印样式 */
+@media print {
+  #settings {
+    display: none;
+  }
+  #content {
+    display: block;
+    min-height: 100vh;
+    height: auto;
+  }
+  #a {
+    display: none;
+  }
+  #b {
+    display: none;
+  }
+  #c {
+    border: none;
+    width: 100% !important;
+    background: #fff;
+  }
 }
