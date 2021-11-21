@@ -8,7 +8,7 @@
  -->
 # 文档对比器
 
-## [示例地址](https://jxj666.github.io/diff_word/)
+## [网站](https://jxj666.github.io/diff_word/)
 
 ### 基于 kpdecker/jsdiff
 ### 完成 渐进式 Web 应用（PWA）
