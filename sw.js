@@ -1,11 +1,11 @@
 /*
- * @LastEditTime: 2021-11-21 15:43:59
+ * @LastEditTime: 2021-11-21 15:58:03
  * @LastEditors: jinxiaojian
  */
-var cacheStorageKey = 'wendanduibiqi-1.1.4'
+let cacheName = 'wendanduibiqi-1.1.5'
 let preUrl = ''
 if (location.protocol === "https:") { preUrl = '/diff_word' }
-var cacheList = [
+let appShellFiles = [
   preUrl + "/index.html",
   preUrl + "/main.js",
   preUrl + "/diff.js",
@@ -15,37 +15,45 @@ var cacheList = [
   preUrl + "/manifest.json",
   preUrl + "/sw.js"
 ]
+let contentToCache = appShellFiles
 
-// 借助 Service Worker, 可以在注册完成安装 Service Worker 时, 抓取资源写入缓存
-self.addEventListener('install', e => {
+// 配置 Service Worker，缓存上述列表的工作就发生在这里：
+self.addEventListener('install', function (e) {
+  console.log('[Service Worker] Install');
   e.waitUntil(
-    caches.open(cacheStorageKey)
-      .then(cache => cache.addAll(cacheList))
-      .then(() => self.skipWaiting())
-  )
-})
+    caches.open(cacheName).then(function (cache) {
+      console.log('[Service Worker] Caching all: app shell and content');
+      return cache.addAll(contentToCache);
+    })
+  );
+});
 
-// 网页抓取资源的过程中, 在 Service Worker 可以捕获到 fetch 事件, 可以编写代码决定如何响应资源的请求
+
+// 如果条件允许，Service Worker 将从缓存中请求内容所需的数据，从而提供离线应用功能：
 self.addEventListener('fetch', function (e) {
   e.respondWith(
-    caches.match(e.request).then(function (response) {
-      if (response != null) {
-        return response
-      }
-      return fetch(e.request.url)
+    caches.match(e.request).then(function (r) {
+      console.log('[Service Worker] Fetching resource: ' + e.request.url);
+      return r || fetch(e.request).then(function (response) {
+        return caches.open(cacheName).then(function (cache) {
+          console.log('[Service Worker] Caching new resource: ' + e.request.url);
+          cache.put(e.request, response.clone());
+          return response;
+        });
+      });
     })
-  )
-})
-// 缓存的资源随着版本的更新会过期, 所以会根据缓存的字符串名称清除旧缓存, 可以遍历所有的缓存名称逐一判断决决定是否清除
+  );
+});
+
+// 用来清理那些我们不再需要的缓存
 self.addEventListener('activate', function (e) {
   e.waitUntil(
-    Promise.all(
-      cacheList.filter(name => {
-        return name !== cacheStorageKey
-      }).map(name => {
-        return caches.delete(name)
-      })
-    ).then(() => self.clients.claim())
-  )
-})
-
+    caches.keys().then(function (keyList) {
+      return Promise.all(keyList.map(function (key) {
+        if (cacheName.indexOf(key) === -1) {
+          return caches.delete(key);
+        }
+      }));
+    })
+  );
+});
