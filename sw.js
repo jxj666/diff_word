@@ -1,8 +1,8 @@
 /*
- * @LastEditTime: 2021-11-20 22:59:43
+ * @LastEditTime: 2021-11-21 15:34:04
  * @LastEditors: jinxiaojian
  */
-var cacheStorageKey = 'wendanduibiqi-1.1.2'
+var cacheStorageKey = 'wendanduibiqi-1.1.3'
 let preUrl = ''
 if (location.protocol === "https:") { preUrl = '/diff_word' }
 var cacheList = [
@@ -38,19 +38,16 @@ self.addEventListener('fetch', function (e) {
 })
 // 缓存的资源随着版本的更新会过期, 所以会根据缓存的字符串名称(这里变量为 cacheStorageKey, 值用了 "minimal-pwa-1")清除旧缓存, 可以遍历所有的缓存名称逐一判断决决定是否清除(备注: 简化的写法, Promise.all 中 return undefined 可能出错, 见评论)
 self.addEventListener('activate', function (e) {
+  // console.log('[ServiceWorker] Activate');
   e.waitUntil(
-    Promise.all(
-      caches.keys().then(cacheNames => {
-        return cacheNames.map(name => {
-          if (name !== cacheStorageKey) {
-            return caches.delete(name)
-          }
-        })
-      })
-    ).then(() => {
-      return self.clients.claim()
-    }).catch(err => {
-      console.log('err', err)
+    caches.keys().then(function (keyList) {
+      return Promise.all(keyList.map(function (key) {
+        if (key !== cacheName) {
+          // console.log('[ServiceWorker] Removing old cache', key);
+          return caches.delete(key);
+        }
+      }));
     })
-  )
-})
+  );
+  return self.clients.claim();
+});
