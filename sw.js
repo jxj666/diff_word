@@ -1,5 +1,5 @@
 /*
- * @LastEditTime: 2021-11-21 15:38:25
+ * @LastEditTime: 2021-11-21 15:39:49
  * @LastEditors: jinxiaojian
  */
 var cacheStorageKey = 'wendanduibiqi-1.1.3'
@@ -40,7 +40,7 @@ self.addEventListener('fetch', function (e) {
 self.addEventListener('activate', function (e) {
   e.waitUntil(
     Promise.all(
-      cacheNames.filter(name => {
+      cacheList.filter(name => {
         return name !== cacheStorageKey
       }).map(name => {
         return caches.delete(name)
