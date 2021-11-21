@@ -1,5 +1,5 @@
 /*
- * @LastEditTime: 2021-11-21 15:58:03
+ * @LastEditTime: 2021-11-21 16:03:49
  * @LastEditors: jinxiaojian
  */
 let cacheName = 'wendanduibiqi-1.1.5'
@@ -50,6 +50,7 @@ self.addEventListener('activate', function (e) {
   e.waitUntil(
     caches.keys().then(function (keyList) {
       return Promise.all(keyList.map(function (key) {
+        console.log('keyList',keyList)
         if (cacheName.indexOf(key) === -1) {
           return caches.delete(key);
         }
