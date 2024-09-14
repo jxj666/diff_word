@@ -41,13 +41,15 @@ ins {
 }
 
 #settings {
-  display: grid;
+  /* display: grid; */
   padding: 0 10px;
   top: 0;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr; */
   line-height: 50px;
   background: #eee;
   border-bottom: 1px solid #999;
+  display: flex;
+  justify-content: space-between;
 }
 #content {
   height: calc(100vh - 55px);
