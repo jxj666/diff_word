@@ -60,3 +60,7 @@ for (var i = 0; i < radio.length; i++) {
     changed();
   }
 }
+function save(){
+  // 打开系统打印对话框
+  window.print();
+}

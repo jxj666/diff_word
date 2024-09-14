@@ -7,7 +7,9 @@
 a {
   color: #2175c999;
 }
-
+button{
+  cursor: pointer;
+}
 html,
 body {
   box-sizing: border-box;
@@ -18,6 +20,9 @@ h1 {
   display: inline;
   font-size: 20px;
   color: #333;
+}
+h3{
+  margin : 0 5px;
 }
 del {
   text-decoration: none;
