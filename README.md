@@ -13,6 +13,6 @@
 ### 基于 kpdecker/jsdiff
 ### 完成 渐进式 Web 应用（PWA）
 
-![示例](./img/2.png)
 ![示例](./img/1.png)
 
+![示例](./img/2.png)
